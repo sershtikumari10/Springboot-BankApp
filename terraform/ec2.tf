@@ -13,17 +13,26 @@ data "aws_ami" "os_image" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "bankapp-automate-key"
-  public_key = file("bankapp-automate-key.pub")
+  public_key = file("bankapp-automate-key.pub.pub.pub")
 }
 
 resource "aws_default_vpc" "default" {
 
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+resource "aws_default_subnet" "default" {
+  availability_zone = data.aws_availability_zones.available.names[0]
+}
+
 resource "aws_security_group" "allow_user_to_connect" {
-  name        = "allow TLS"
+  name_prefix = "bankapp-sg-"
   description = "Allow user to connect"
   vpc_id      = aws_default_vpc.default.id
+  
   ingress {
     description = "port 22 allow ssh"
     from_port   = 22
@@ -62,10 +71,11 @@ resource "aws_security_group" "allow_user_to_connect" {
 }
 
 resource "aws_instance" "testinstance" {
-  ami             = data.aws_ami.os_image.id
-  instance_type   = var.instance_type
-  key_name        = aws_key_pair.deployer.key_name
-  security_groups = [aws_security_group.allow_user_to_connect.name]
+  ami                    = data.aws_ami.os_image.id
+  instance_type          = var.instance_type
+  key_name               = aws_key_pair.deployer.key_name
+  subnet_id              = aws_default_subnet.default.id
+  vpc_security_group_ids = [aws_security_group.allow_user_to_connect.id]
   tags = {
     Name = "Bankapp-Automation-Server"
   }
