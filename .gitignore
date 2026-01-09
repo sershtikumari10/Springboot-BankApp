@@ -46,7 +46,11 @@ terraform/.terraform/providers/registry.terraform.io/hashicorp/aws/5.82.2/darwin
 *.tfvars
 .terraform.lock.hcl
 <<<<<<< HEAD
+<<<<<<< HEAD
 terraform/.terraform/
 >>>>>>> 40effb6 (Remove terraform provider binaries and add to gitignore)
 =======
 >>>>>>> 661e082 (added terraform and docker)
+=======
+.bankapp-automate-key,pub.pub
+>>>>>>> 38ef6b3 (mega-project)
