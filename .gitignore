@@ -39,19 +39,5 @@ build/
 *.tfvars
 .terraform.lock.hcl
 .bankapp-automate-key.pub.pub
+.bankapp-automate-key.pub.pub.pub
 
-
-# Terraform
-.terraform/
-*.tfstate
-*.tfstate.*
-.terraform.lock.hcl
-
-# Terraform variable files
-*.tfvars
-terraform.tfvars
-
-# Sensitive keys
-*.pem
-*.key
-*.env
