@@ -11,3 +11,4 @@ EXPOSE 8080
 CMD ["java","-jar","/src/target/bankapp.jar"]
 
 # updated docker config
+
